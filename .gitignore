@@ -1,0 +1,24 @@
+# Eclipse
+.project
+.classpath
+.settings/
+
+# IntelliJ
+.idea/
+*.iml
+
+# VS Code
+.vscode/
+
+# Maven
+target/
+
+# Database config
+src/main/resources/db.xml
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
