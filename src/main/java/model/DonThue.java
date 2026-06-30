@@ -6,10 +6,14 @@ public class DonThue {
 	private int maDonThue;
 	private int userID;
 	private String diaChiNhanXe;
-	private String trangThai;
+	private TrangThai trangThai;
 	private LocalDateTime ngayDat;
 
-	public DonThue(int maDonThue, int userID, String diaChiNhanXe, String trangThai, LocalDateTime ngayDat) {
+	public enum TrangThai {
+		CHO_XAC_NHAN, CHO_NHAN_XE, DANG_THUE, HOAN_THANH, DA_HUY
+	}
+
+	public DonThue(int maDonThue, int userID, String diaChiNhanXe, TrangThai trangThai, LocalDateTime ngayDat) {
 		super();
 		this.maDonThue = maDonThue;
 		this.userID = userID;
@@ -18,7 +22,11 @@ public class DonThue {
 		this.ngayDat = ngayDat;
 	}
 
-	public DonThue(int userID, String diaChiNhanXe, String trangThai, LocalDateTime ngayDat) {
+	public DonThue() {
+		super();
+	}
+
+	public DonThue(int userID, String diaChiNhanXe, TrangThai trangThai, LocalDateTime ngayDat) {
 		super();
 		this.userID = userID;
 		this.diaChiNhanXe = diaChiNhanXe;
@@ -50,11 +58,11 @@ public class DonThue {
 		this.diaChiNhanXe = diaChiNhanXe;
 	}
 
-	public String getTrangThai() {
+	public TrangThai getTrangThai() {
 		return trangThai;
 	}
 
-	public void setTrangThai(String trangThai) {
+	public void setTrangThai(TrangThai trangThai) {
 		this.trangThai = trangThai;
 	}
 
