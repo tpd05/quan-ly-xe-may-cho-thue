@@ -27,6 +27,10 @@ public class TaiKhoan {
 		this.soCCCD = soCCCD;
 	}
 
+	public TaiKhoan() {
+		super();
+	}
+
 	public int getUserID() {
 		return userID;
 	}

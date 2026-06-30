@@ -9,10 +9,18 @@ public class ThanhToan {
 	private BigDecimal soTien;
 	private String phuongThuc;
 	private LocalDateTime thoiGianTao;
-	private String trangThai;
+	private TrangThai trangThai;
+
+	public enum TrangThai {
+
+		CHUA_THANH_TOAN,
+
+		DA_THANH_TOAN
+
+	}
 
 	public ThanhToan(int maThanhToan, int maDonThue, BigDecimal soTien, String phuongThuc, LocalDateTime thoiGianTao,
-			String trangThai) {
+			TrangThai trangThai) {
 		super();
 		this.maThanhToan = maThanhToan;
 		this.maDonThue = maDonThue;
@@ -22,7 +30,12 @@ public class ThanhToan {
 		this.trangThai = trangThai;
 	}
 
-	public ThanhToan(int maDonThue, BigDecimal soTien, String phuongThuc, LocalDateTime thoiGianTao, String trangThai) {
+	public ThanhToan() {
+		super();
+	}
+
+	public ThanhToan(int maDonThue, BigDecimal soTien, String phuongThuc, LocalDateTime thoiGianTao,
+			TrangThai trangThai) {
 		super();
 		this.maDonThue = maDonThue;
 		this.soTien = soTien;
@@ -71,11 +84,11 @@ public class ThanhToan {
 		this.thoiGianTao = thoiGianTao;
 	}
 
-	public String getTrangThai() {
+	public TrangThai getTrangThai() {
 		return trangThai;
 	}
 
-	public void setTrangThai(String trangThai) {
+	public void setTrangThai(TrangThai trangThai) {
 		this.trangThai = trangThai;
 	}
 
