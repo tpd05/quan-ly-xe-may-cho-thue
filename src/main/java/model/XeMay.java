@@ -7,39 +7,44 @@ public class XeMay {
 	private int maChiNhanh;
 	private String hangXe;
 	private String dongXe;
-	private int doiXe;
+	private int namSanXuat;
 	private float dungTich;
-	private String urlHinhAnh;
 	private String bienSo;
-	private String trangThai;
+	private TrangThai trangThai;
 	private BigDecimal giaNgay;
 	private BigDecimal giaTuan;
 
-	public XeMay(int maXe, int maChiNhanh, String hangXe, String dongXe, int doiXe, float dungTich, String urlHinhAnh,
-			String bienSo, String trangThai, BigDecimal giaNgay, BigDecimal giaTuan) {
+	public enum TrangThai {
+		SAN_SANG, BAO_TRI
+	}
+
+	public XeMay(int maXe, int maChiNhanh, String hangXe, String dongXe, int namSanXuat, float dungTich, String bienSo,
+			TrangThai trangThai, BigDecimal giaNgay, BigDecimal giaTuan) {
 		super();
 		this.maXe = maXe;
 		this.maChiNhanh = maChiNhanh;
 		this.hangXe = hangXe;
 		this.dongXe = dongXe;
-		this.doiXe = doiXe;
+		this.namSanXuat = namSanXuat;
 		this.dungTich = dungTich;
-		this.urlHinhAnh = urlHinhAnh;
 		this.bienSo = bienSo;
 		this.trangThai = trangThai;
 		this.giaNgay = giaNgay;
 		this.giaTuan = giaTuan;
 	}
 
-	public XeMay(int maChiNhanh, String hangXe, String dongXe, int doiXe, float dungTich, String urlHinhAnh,
-			String bienSo, String trangThai, BigDecimal giaNgay, BigDecimal giaTuan) {
+	public XeMay() {
+		super();
+	}
+
+	public XeMay(int maChiNhanh, String hangXe, String dongXe, int namSanXuat, float dungTich, String bienSo,
+			TrangThai trangThai, BigDecimal giaNgay, BigDecimal giaTuan) {
 		super();
 		this.maChiNhanh = maChiNhanh;
 		this.hangXe = hangXe;
 		this.dongXe = dongXe;
-		this.doiXe = doiXe;
+		this.namSanXuat = namSanXuat;
 		this.dungTich = dungTich;
-		this.urlHinhAnh = urlHinhAnh;
 		this.bienSo = bienSo;
 		this.trangThai = trangThai;
 		this.giaNgay = giaNgay;
@@ -78,12 +83,12 @@ public class XeMay {
 		this.dongXe = dongXe;
 	}
 
-	public int getDoiXe() {
-		return doiXe;
+	public int getNamSanXuat() {
+		return namSanXuat;
 	}
 
-	public void setDoiXe(int doiXe) {
-		this.doiXe = doiXe;
+	public void setNamSanXuat(int namSanXuat) {
+		this.namSanXuat = namSanXuat;
 	}
 
 	public float getDungTich() {
@@ -94,14 +99,6 @@ public class XeMay {
 		this.dungTich = dungTich;
 	}
 
-	public String getUrlHinhAnh() {
-		return urlHinhAnh;
-	}
-
-	public void setUrlHinhAnh(String urlHinhAnh) {
-		this.urlHinhAnh = urlHinhAnh;
-	}
-
 	public String getBienSo() {
 		return bienSo;
 	}
@@ -110,11 +107,11 @@ public class XeMay {
 		this.bienSo = bienSo;
 	}
 
-	public String getTrangThai() {
+	public TrangThai getTrangThai() {
 		return trangThai;
 	}
 
-	public void setTrangThai(String trangThai) {
+	public void setTrangThai(TrangThai trangThai) {
 		this.trangThai = trangThai;
 	}
 
