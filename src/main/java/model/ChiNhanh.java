@@ -13,6 +13,10 @@ public class ChiNhanh {
 		this.tenChiNhanh = tenChiNhanh;
 		this.diaDiem = diaDiem;
 	}
+	
+	public ChiNhanh() {
+		super();
+	}
 
 	public int getMaChiNhanh() {
 		return maChiNhanh;
