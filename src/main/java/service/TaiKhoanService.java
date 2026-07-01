@@ -12,6 +12,9 @@ public class TaiKhoanService {
 
 	private final TaiKhoanDAO dao = new TaiKhoanDAO();
 	
+    /**
+     * Tìm tài khoản theo mã.
+     */
 	public TaiKhoan timTheoId(int id) {
 		if(!Validator.isPositive(id)) {
 			return null;
@@ -19,10 +22,16 @@ public class TaiKhoanService {
 		return dao.findById(id);
 	}
 	
+    /**
+     * Lấy toàn bộ tài khoản.
+     */
 	public List<TaiKhoan> timTatCa(){
 		return dao.findAll();
 	}
 	
+    /**
+     * Tìm tài khoản theo username.
+     */
 	public TaiKhoan timTheoUsername(String username) {
 		if(!Validator.isUserName(username)) {
 			return null;
@@ -36,10 +45,16 @@ public class TaiKhoanService {
 		return null;
 	}
 	
+    /**
+     * Kiểm tra username đã tồn tại chưa.
+     */
 	public boolean tonTaiUsername(String username) {
 	    return timTheoUsername(username) != null;
 	}
 	
+    /**
+     * Kiểm tra soCCCD đã tồn tại chưa.
+     */
 	public boolean tonTaiSoCCCD(String soCCCD) {
 		if(!Validator.isCCCD(soCCCD)) {
 			return false;
@@ -53,6 +68,9 @@ public class TaiKhoanService {
 		return false;
 	}
 	
+    /**
+     * Kiểm tra email đã tồn tại chưa.
+     */
 	public boolean tonTaiEmail(String email) {
 		if(!Validator.isEmail(email)) {
 			return false;
@@ -66,10 +84,21 @@ public class TaiKhoanService {
 		return false;
 	}
 	
+    /**
+     * Thêm tài khoản.
+     */
 	public boolean them(TaiKhoan tk) {
 		
 		if(Validator.isNull(tk)) {
 			return false;
+		}
+		
+		if (!Validator.isEmail(tk.getEmail())) {
+		    return false;
+		}
+
+		if (!Validator.isCCCD(tk.getSoCCCD())) {
+		    return false;
 		}
 		
 		if (!Validator.isPassword(tk.getPassword())) {
@@ -101,6 +130,9 @@ public class TaiKhoanService {
 		return dao.insert(tk);
 	}
 	
+    /**
+     * Cập nhật thông tin tài khoản.
+     */
 	public boolean sua(TaiKhoan tk) {
 		if (Validator.isNull(tk)) {
 		    return false;
@@ -151,6 +183,9 @@ public class TaiKhoanService {
 		return dao.update(tk);
 	}
 	
+    /**
+     * Xóa tài khoản.
+     */
 	public boolean xoa(int id) {
 		if(Validator.isNull(timTheoId(id))) {
 			return false;
