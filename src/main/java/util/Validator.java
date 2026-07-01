@@ -105,5 +105,18 @@ public final class Validator {
 	public static boolean isRole(TaiKhoan.Role role) {
 		return role != null;
 	}
+	
+	// CHI NHÁNH
+
+	// Tên chi nhánh: 2 - 100 ký tự.
+	public static boolean isTenChiNhanh(String value) {
+	    return isNotBlank(value) && value.length() >= 2 && value.length() <= 100;
+	}
+
+	// Địa điểm: 5 - 255 ký tự.
+	public static boolean isDiaDiem(String value) {
+	    return isNotBlank(value) && value.length() >= 5 && value.length() <= 255;
+	}
+	
 
 }
