@@ -105,18 +105,45 @@ public final class Validator {
 	public static boolean isRole(TaiKhoan.Role role) {
 		return role != null;
 	}
-	
+
 	// CHI NHÁNH
 
 	// Tên chi nhánh: 2 - 100 ký tự.
 	public static boolean isTenChiNhanh(String value) {
-	    return isNotBlank(value) && value.length() >= 2 && value.length() <= 100;
+		return isNotBlank(value) && value.length() >= 2 && value.length() <= 100;
 	}
 
 	// Địa điểm: 5 - 255 ký tự.
 	public static boolean isDiaDiem(String value) {
-	    return isNotBlank(value) && value.length() >= 5 && value.length() <= 255;
+		return isNotBlank(value) && value.length() >= 5 && value.length() <= 255;
 	}
-	
+
+	// XE MÁY
+
+	// Hãng xe: 2 - 50 ký tự.
+	public static boolean isHangXe(String value) {
+		return isNotBlank(value) && value.length() >= 2 && value.length() <= 50;
+	}
+
+	// Dòng xe: 2 - 100 ký tự.
+	public static boolean isDongXe(String value) {
+		return isNotBlank(value) && value.length() >= 2 && value.length() <= 100;
+	}
+
+	// Năm sản xuất: từ 1900 đến năm hiện tại.
+	public static boolean isNamSanXuat(int value) {
+		int currentYear = java.time.Year.now().getValue();
+		return value >= 1900 && value <= currentYear;
+	}
+
+	// Dung tích xi-lanh (cc).
+	public static boolean isDungTich(float value) {
+		return value >= 50 && value <= 2000;
+	}
+
+	// Biển số xe.
+	public static boolean isBienSo(String value) {
+		return isNotBlank(value) && value.matches("^\\d{2}[A-Z]-\\d{3}\\.\\d{2}$");
+	}
 
 }
