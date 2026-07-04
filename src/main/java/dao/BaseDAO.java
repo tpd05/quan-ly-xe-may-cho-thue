@@ -5,6 +5,12 @@ import java.util.List;
 
 import util.FileUtil;
 
+/**
+ * Lớp cha trừu tượng triển khai các thao tác CRUD dùng chung cho mọi DAO
+ * lưu trữ dữ liệu dạng file CSV.
+ *
+ * @param <T> kiểu đối tượng được quản lý.
+ */
 public abstract class BaseDAO<T> implements DAO<T>, Mapper<T> {
 
 	protected final String filePath;
@@ -12,7 +18,7 @@ public abstract class BaseDAO<T> implements DAO<T>, Mapper<T> {
 
 	/**
 	 * Khởi tạo DAO.
-	 * 
+	 *
 	 * Nếu file dữ liệu chưa tồn tại sẽ tự động tạo mới. Nếu file rỗng sẽ ghi dòng
 	 * tiêu đề (header).
 	 *
@@ -49,16 +55,16 @@ public abstract class BaseDAO<T> implements DAO<T>, Mapper<T> {
 	}
 
 	/**
-	 * Đọc dữ liệu từ file và chuyển thành danh sách đối tượng. Bỏ qua dòng đầu tiên
-	 * (header).
+	 * Đọc dữ liệu từ file và chuyển thành danh sách đối tượng. Bỏ qua dòng đầu
+	 * tiên (header).
 	 *
 	 * @return Danh sách đối tượng.
 	 */
 	protected List<T> loadObjects() {
 		List<String> lines = readLines();
-
 		List<T> res = new ArrayList<>();
 
+		// Bắt đầu từ index 1 để bỏ qua dòng header
 		for (int i = 1; i < lines.size(); i++) {
 			res.add(parse(lines.get(i)));
 		}
@@ -72,9 +78,7 @@ public abstract class BaseDAO<T> implements DAO<T>, Mapper<T> {
 	 * @param objects Danh sách đối tượng cần lưu.
 	 */
 	protected void saveObjects(List<T> objects) {
-
 		List<String> lines = new ArrayList<>();
-
 		lines.add(header);
 
 		for (T obj : objects) {
@@ -85,7 +89,8 @@ public abstract class BaseDAO<T> implements DAO<T>, Mapper<T> {
 	}
 
 	/**
-	 * Lấy khóa chính (ID) của đối tượng. Mỗi DAO con sẽ tự định nghĩa ID tương ứng.
+	 * Lấy khóa chính (ID) của đối tượng. Mỗi DAO con sẽ tự định nghĩa ID tương
+	 * ứng.
 	 *
 	 * @param object Đối tượng cần lấy ID.
 	 * @return Giá trị ID.
@@ -144,11 +149,8 @@ public abstract class BaseDAO<T> implements DAO<T>, Mapper<T> {
 
 		for (int i = 0; i < objects.size(); i++) {
 			if (getId(objects.get(i)) == getId(upObject)) {
-
 				objects.set(i, upObject);
-
 				saveObjects(objects);
-
 				return true;
 			}
 		}
@@ -167,11 +169,8 @@ public abstract class BaseDAO<T> implements DAO<T>, Mapper<T> {
 
 		for (int i = 0; i < objects.size(); i++) {
 			if (getId(objects.get(i)) == id) {
-
 				objects.remove(i);
-
 				saveObjects(objects);
-
 				return true;
 			}
 		}
