@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 
 public class XeMay {
 	private int maXe;
-	private int maChiNhanh;
+	private int userID;
 	private String hangXe;
 	private String dongXe;
 	private int namSanXuat;
@@ -18,11 +18,15 @@ public class XeMay {
 		SAN_SANG, BAO_TRI
 	}
 
-	public XeMay(int maXe, int maChiNhanh, String hangXe, String dongXe, int namSanXuat, float dungTich, String bienSo,
+	public XeMay() {
+		super();
+	}
+
+	public XeMay(int maXe, int userID, String hangXe, String dongXe, int namSanXuat, float dungTich, String bienSo,
 			TrangThai trangThai, BigDecimal giaNgay, BigDecimal giaTuan) {
 		super();
 		this.maXe = maXe;
-		this.maChiNhanh = maChiNhanh;
+		this.userID = userID;
 		this.hangXe = hangXe;
 		this.dongXe = dongXe;
 		this.namSanXuat = namSanXuat;
@@ -33,14 +37,10 @@ public class XeMay {
 		this.giaTuan = giaTuan;
 	}
 
-	public XeMay() {
-		super();
-	}
-
-	public XeMay(int maChiNhanh, String hangXe, String dongXe, int namSanXuat, float dungTich, String bienSo,
+	public XeMay(int userID, String hangXe, String dongXe, int namSanXuat, float dungTich, String bienSo,
 			TrangThai trangThai, BigDecimal giaNgay, BigDecimal giaTuan) {
 		super();
-		this.maChiNhanh = maChiNhanh;
+		this.userID = userID;
 		this.hangXe = hangXe;
 		this.dongXe = dongXe;
 		this.namSanXuat = namSanXuat;
@@ -59,12 +59,12 @@ public class XeMay {
 		this.maXe = maXe;
 	}
 
-	public int getMaChiNhanh() {
-		return maChiNhanh;
+	public int getUserID() {
+		return userID;
 	}
 
-	public void setMaChiNhanh(int maChiNhanh) {
-		this.maChiNhanh = maChiNhanh;
+	public void setUserID(int userID) {
+		this.userID = userID;
 	}
 
 	public String getHangXe() {
@@ -130,5 +130,6 @@ public class XeMay {
 	public void setGiaTuan(BigDecimal giaTuan) {
 		this.giaTuan = giaTuan;
 	}
+	
 
 }

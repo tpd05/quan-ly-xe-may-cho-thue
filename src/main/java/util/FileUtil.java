@@ -7,18 +7,32 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.List;
 
+/**
+ * Lớp tiện ích xử lý đọc/ghi file, dùng làm nền tảng lưu trữ dữ liệu
+ * dạng CSV cho toàn bộ DAO trong hệ thống.
+ */
 public final class FileUtil {
-	private FileUtil() {
 
+	private FileUtil() {
 	}
 
-	// Kiểm tra file có tồn tại hay không
+	/**
+	 * Kiểm tra file có tồn tại hay không.
+	 *
+	 * @param filePath Đường dẫn file.
+	 * @return true nếu file tồn tại.
+	 */
 	public static boolean exists(String filePath) {
 		Path path = Paths.get(filePath);
 		return Files.exists(path);
 	}
 
-	// Tạo file nếu chưa tồn tại
+	/**
+	 * Tạo file nếu chưa tồn tại. Tự động tạo cả thư mục cha nếu cần.
+	 *
+	 * @param filePath Đường dẫn file cần tạo.
+	 * @throws RuntimeException nếu không thể tạo file.
+	 */
 	public static void createIfNotExists(String filePath) {
 		Path path = Paths.get(filePath);
 
@@ -38,7 +52,13 @@ public final class FileUtil {
 		}
 	}
 
-	// Đọc all file vào bộ nhớ và trả về danh sách các dòng
+	/**
+	 * Đọc toàn bộ file vào bộ nhớ và trả về danh sách các dòng.
+	 *
+	 * @param filePath Đường dẫn file cần đọc.
+	 * @return Danh sách các dòng trong file.
+	 * @throws RuntimeException nếu không thể đọc file.
+	 */
 	public static List<String> readAllLines(String filePath) {
 		Path path = Paths.get(filePath);
 
@@ -49,7 +69,13 @@ public final class FileUtil {
 		}
 	}
 
-	// Ghi đè toàn bộ file
+	/**
+	 * Ghi đè toàn bộ nội dung file bằng danh sách dòng mới.
+	 *
+	 * @param filePath Đường dẫn file cần ghi.
+	 * @param lines    Danh sách các dòng cần ghi.
+	 * @throws RuntimeException nếu không thể ghi file.
+	 */
 	public static void writeAllLines(String filePath, List<String> lines) {
 		Path path = Paths.get(filePath);
 
@@ -67,7 +93,13 @@ public final class FileUtil {
 		}
 	}
 
-	// Ghi thêm 1 dòng cuối file
+	/**
+	 * Ghi thêm 1 dòng vào cuối file (không ghi đè nội dung cũ).
+	 *
+	 * @param filePath Đường dẫn file cần ghi thêm.
+	 * @param line     Dòng dữ liệu cần thêm.
+	 * @throws RuntimeException nếu không thể ghi file.
+	 */
 	public static void appendLine(String filePath, String line) {
 		Path path = Paths.get(filePath);
 
@@ -84,5 +116,4 @@ public final class FileUtil {
 			throw new RuntimeException("Không thể ghi thêm dữ liệu vào file: " + filePath, e);
 		}
 	}
-
 }

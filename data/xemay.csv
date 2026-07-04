@@ -1,1 +1,4 @@
-﻿maXe,maChiNhanh,hangXe,dongXe,namSanXuat,dungTich,bienSo,trangThai,giaNgay,giaTuan
+maXe,userID,hangXe,dongXe,namSanXuat,dungTich,bienSo,trangThai,giaNgay,giaTuan
+1,1,Honda,Wave,2022,110.0,29A-12345,SAN_SANG,150000,900000
+2,1,Yamaha,Exciter,2021,155.0,30B-67890,BAO_TRI,220000,1300000
+3,1,yamaha,exciter,2026,150.0,30A-123.56,SAN_SANG,120000.0,700000.0

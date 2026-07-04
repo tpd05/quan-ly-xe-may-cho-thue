@@ -1,3 +1,2 @@
-﻿userID,username,password,role,hoTen,soDienThoai,email,soCCCD
-102,Trần Phương Đoàn,123456,ADMIN,Test,0123456789,test@gmail.com,123456789012
-102,Trần Phương Đoàn,123456,ADMIN,Test,0123456789,test@gmail.com,123456789012
+﻿userID,username,password,role,hoTen,soDienThoai,email,soCCCD,tenCuaHang,diaChiCuaHang
+1,doitac01,12345678,DOI_TAC,Nguyen Van A,987654321,doitac01@example.com,12345678901,Hang A,123 Le Loi
