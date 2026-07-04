@@ -9,13 +9,15 @@ public class TaiKhoan {
 	private String soDienThoai;
 	private String email;
 	private String soCCCD;
+	private String tenCuaHang;
+	private String diaChiCuaHang;
 
 	public enum Role {
-		ADMIN, DOI_TAC, KHACH_HANG
+		DOI_TAC
 	}
 
 	public TaiKhoan(int userID, String username, String password, Role role, String hoTen, String soDienThoai,
-			String email, String soCCCD) {
+			String email, String soCCCD, String tenCuaHang, String diaChiCuaHang) {
 		super();
 		this.userID = userID;
 		this.username = username;
@@ -25,6 +27,22 @@ public class TaiKhoan {
 		this.soDienThoai = soDienThoai;
 		this.email = email;
 		this.soCCCD = soCCCD;
+		this.tenCuaHang = tenCuaHang;
+		this.diaChiCuaHang = diaChiCuaHang;
+	}
+
+	public TaiKhoan(String username, String password, Role role, String hoTen, String soDienThoai, String email,
+			String soCCCD, String tenCuaHang, String diaChiCuaHang) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.role = role;
+		this.hoTen = hoTen;
+		this.soDienThoai = soDienThoai;
+		this.email = email;
+		this.soCCCD = soCCCD;
+		this.tenCuaHang = tenCuaHang;
+		this.diaChiCuaHang = diaChiCuaHang;
 	}
 
 	public TaiKhoan() {
@@ -95,10 +113,20 @@ public class TaiKhoan {
 		this.soCCCD = soCCCD;
 	}
 
-	@Override
-	public String toString() {
-		return "TaiKhoan [userID=" + userID + ", username=" + username + ", password=" + password + ", role=" + role
-				+ ", hoTen=" + hoTen + ", soDienThoai=" + soDienThoai + ", email=" + email + ", soCCCD=" + soCCCD + "]";
+	public String getTenCuaHang() {
+		return tenCuaHang;
+	}
+
+	public void setTenCuaHang(String tenCuaHang) {
+		this.tenCuaHang = tenCuaHang;
+	}
+
+	public String getDiaChiCuaHang() {
+		return diaChiCuaHang;
+	}
+
+	public void setDiaChiCuaHang(String diaChiCuaHang) {
+		this.diaChiCuaHang = diaChiCuaHang;
 	}
 
 }
