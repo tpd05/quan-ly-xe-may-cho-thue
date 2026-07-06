@@ -6,23 +6,27 @@ import java.util.List;
 import model.ChiTietDonThue;
 import util.FilePath;
 
-/**
- * DAO quản lý dữ liệu chi tiết đơn thuê (lưu trong file CSV).
- * Mỗi chi tiết đơn thuê gắn với 1 đơn thuê và 1 xe cụ thể.
- */
 public class ChiTietDonThueDAO extends BaseDAO<ChiTietDonThue> {
 
 	private static final String FILE_PATH = FilePath.CHI_TIET_DON_THUE;
-	private static final String HEADER =
-			"maChiTiet,maDonThue,maXe,thoiGianBatDau,thoiGianKetThuc,thoiGianTra,donGia";
+	private static final String HEADER = "maChiTiet,maDonThue,maXe,thoiGianBatDau,thoiGianKetThuc,thoiGianTra,donGia";
 
 	public ChiTietDonThueDAO() {
 		super(FILE_PATH, HEADER);
 	}
 
 	/**
-	 * Chuyển 1 dòng từ file sang đối tượng {@link ChiTietDonThue}.
-	 * Trường thoiGianTra có thể rỗng (chưa trả xe) nên được xử lý riêng.
+	 * Constructor phụ, chỉ dùng cho unit test: cho phép chỉ định đường dẫn
+	 * file khác (ví dụ file tạm), tránh test đụng vào file dữ liệu thật.
+	 *
+	 * @param filePath Đường dẫn file dữ liệu dùng riêng cho test.
+	 */
+	public ChiTietDonThueDAO(String filePath) {
+		super(filePath, HEADER);
+	}
+
+	/**
+	 * Chuyển 1 dòng từ file sang 1 object
 	 */
 	@Override
 	public ChiTietDonThue parse(String line) {
@@ -32,7 +36,6 @@ public class ChiTietDonThueDAO extends BaseDAO<ChiTietDonThue> {
 			throw new IllegalArgumentException("Dữ liệu chi tiết đơn thuê không hợp lệ: " + line);
 		}
 
-		// thoiGianTra có thể chưa có giá trị (xe chưa được trả)
 		LocalDateTime thoiGianTra = null;
 		String thoiGianTraRaw = data[5].trim();
 		if (!thoiGianTraRaw.isEmpty()) {
@@ -45,11 +48,11 @@ public class ChiTietDonThueDAO extends BaseDAO<ChiTietDonThue> {
 	}
 
 	/**
-	 * Chuyển đối tượng {@link ChiTietDonThue} sang 1 dòng của file.
-	 * Nếu chưa có thoiGianTra thì ghi giá trị rỗng.
+	 * Chuyển 1 object sang 1 dòng của file
 	 */
 	@Override
 	public String format(ChiTietDonThue object) {
+
 		String thoiGianTra = "";
 
 		if (object.getThoiGianTra() != null) {
@@ -62,7 +65,7 @@ public class ChiTietDonThueDAO extends BaseDAO<ChiTietDonThue> {
 	}
 
 	/**
-	 * Lấy Id của 1 đối tượng {@link ChiTietDonThue}.
+	 * Lấy Id của 1 object
 	 */
 	@Override
 	protected int getId(ChiTietDonThue object) {
@@ -70,13 +73,11 @@ public class ChiTietDonThueDAO extends BaseDAO<ChiTietDonThue> {
 	}
 
 	/**
-	 * Ghi đè toàn bộ nội dung file bằng danh sách đối tượng mới.
-	 * Khác với insert/update/delete (thao tác từng phần tử), method này
-	 * thay thế toàn bộ dữ liệu hiện có.
-	 *
-	 * @param objects Danh sách đối tượng cần lưu.
+	 * Ghi đè tất cả nội dung trong file bằng list object
+	 * @param objects
 	 */
 	public void replaceAll(List<ChiTietDonThue> objects) {
 		saveObjects(objects);
 	}
+
 }

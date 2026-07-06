@@ -1,0 +1,58 @@
+[Đối tác chọn "Thông tin tài khoản"]
+            |
+            v
+[TaiKhoanController.quanLyThongTin()]
+            |
+            v
+[AuthService.requireDoiTac()]
+            |
+            v
+[TaiKhoanService? -> AuthService.layThongTinTaiKhoan()]
+            |
+            v
+[TaiKhoanView.hienThiThongTin(dto)]
+            |
+            v
+[TaiKhoanView.hienThiMenu()]
+            |
+            v
+[Chọn 1: Sửa thông tin]
+            |
+            v
+[TaiKhoanView.nhapThongTinSua(hienTai)]
+            |
+            v
+[Nhập dữ liệu mới / bỏ trống nếu giữ nguyên]
+            |
+            v
+[TaiKhoanController.suaThongTin()]
+            |
+            v
+[AuthService.suaThongTinTaiKhoan(input)]
+            |
+            v
+[Validate dữ liệu]
+  - hoTen hợp lệ
+  - soDienThoai hợp lệ
+  - email hợp lệ
+  - soCCCD hợp lệ
+  - tenCuaHang không rỗng
+  - diaChiCuaHang hợp lệ
+            |
+            v
+[Nếu validate fail -> Result.fail(message)]
+            |
+            v
+[Nếu success -> cập nhật giá trị mới vào TaiKhoan hiện tại]
+            |
+            v
+[TaiKhoanDAO.update(current)]
+            |
+            v
+[Ghi đè file taikhoan.csv]
+            |
+            v
+[Trả về Result.ok hoặc Result.fail]
+            |
+            v
+[TaiKhoanView.hienThiKetQua(result)]

@@ -1,2 +1,2 @@
-﻿userID,username,password,role,hoTen,soDienThoai,email,soCCCD,tenCuaHang,diaChiCuaHang
-1,doitac01,12345678,DOI_TAC,Nguyen Van A,987654321,doitac01@example.com,12345678901,Hang A,123 Le Loi
+userID,username,password,role,hoTen,soDienThoai,email,soCCCD,tenCuaHang,diaChiCuaHang
+1,doitac01,ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f,DOI_TAC,Nguyen Van A,987654321,doitac01@example.com,12345678901,Hang A,123 Le Loi

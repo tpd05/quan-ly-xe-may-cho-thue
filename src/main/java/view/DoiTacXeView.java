@@ -184,13 +184,13 @@ public class DoiTacXeView {
 		String dongXe = Input.inputString("Nhập dòng xe mới (bỏ trống để giữ nguyên): ");
 		xe.setDongXe(Validator.isNotBlank(dongXe) ? dongXe : xeCu.getDongXe());
 
-		String namSanXuatInput = Input.inputString("Nhập năm sản xuất mới (bỏ trống để giữ nguyên): ");
-		xe.setNamSanXuat(Validator.isNotBlank(namSanXuatInput) ? Integer.parseInt(namSanXuatInput.trim())
-				: xeCu.getNamSanXuat());
+		xe.setNamSanXuat(nhapIntGiuNguyenNeuBoTrong(
+				"Nhập năm sản xuất mới (bỏ trống để giữ nguyên): ",
+				xeCu.getNamSanXuat(), Validator::isNamSanXuat, "Năm sản xuất không hợp lệ!"));
 
-		String dungTichInput = Input.inputString("Nhập dung tích mới cc (bỏ trống để giữ nguyên): ");
-		xe.setDungTich(Validator.isNotBlank(dungTichInput) ? Float.parseFloat(dungTichInput.trim())
-				: xeCu.getDungTich());
+		xe.setDungTich(nhapFloatGiuNguyenNeuBoTrong(
+				"Nhập dung tích mới cc (bỏ trống để giữ nguyên): ",
+				xeCu.getDungTich(), Validator::isDungTich, "Dung tích không hợp lệ!"));
 
 		String bienSo = Input.inputString("Nhập biển số mới (bỏ trống để giữ nguyên): ");
 		xe.setBienSo(Validator.isNotBlank(bienSo) ? bienSo : xeCu.getBienSo());
@@ -198,17 +198,109 @@ public class DoiTacXeView {
 		// Trạng thái xe không cho sửa trực tiếp qua form này, giữ nguyên giá trị gốc
 		xe.setTrangThai(xeCu.getTrangThai());
 
-		String giaNgayInput = Input.inputString("Nhập giá thuê/ngày mới (bỏ trống để giữ nguyên): ");
-		xe.setGiaNgay(Validator.isNotBlank(giaNgayInput)
-				? BigDecimal.valueOf(Double.parseDouble(giaNgayInput.trim()))
-				: xeCu.getGiaNgay());
+		xe.setGiaNgay(nhapGiaGiuNguyenNeuBoTrong(
+				"Nhập giá thuê/ngày mới (bỏ trống để giữ nguyên): ",
+				xeCu.getGiaNgay(), "Giá thuê/ngày phải lớn hơn 0!"));
 
-		String giaTuanInput = Input.inputString("Nhập giá thuê/tuần mới (bỏ trống để giữ nguyên): ");
-		xe.setGiaTuan(Validator.isNotBlank(giaTuanInput)
-				? BigDecimal.valueOf(Double.parseDouble(giaTuanInput.trim()))
-				: xeCu.getGiaTuan());
+		xe.setGiaTuan(nhapGiaGiuNguyenNeuBoTrong(
+				"Nhập giá thuê/tuần mới (bỏ trống để giữ nguyên): ",
+				xeCu.getGiaTuan(), "Giá thuê/tuần phải lớn hơn 0!"));
 
 		return xe;
+	}
+
+	/**
+	 * Nhập 1 giá trị int cho form sửa: bỏ trống để giữ nguyên giá trị cũ,
+	 * nhập lại nếu không phải số nguyên hợp lệ hoặc không thỏa điều kiện.
+	 *
+	 * @param message       Thông báo hiển thị khi nhập.
+	 * @param giaTriCu      Giá trị cũ, dùng khi người dùng bỏ trống.
+	 * @param dieuKienHopLe Điều kiện hợp lệ áp dụng cho giá trị mới.
+	 * @param thongBaoLoi   Thông báo hiển thị khi giá trị nhập không hợp lệ.
+	 * @return Giá trị mới hợp lệ, hoặc giá trị cũ nếu bỏ trống.
+	 */
+	private int nhapIntGiuNguyenNeuBoTrong(String message, int giaTriCu,
+			java.util.function.IntPredicate dieuKienHopLe, String thongBaoLoi) {
+		while (true) {
+			String input = Input.inputString(message);
+
+			if (!Validator.isNotBlank(input)) {
+				return giaTriCu;
+			}
+
+			try {
+				int value = Integer.parseInt(input.trim());
+				if (dieuKienHopLe.test(value)) {
+					return value;
+				}
+			} catch (NumberFormatException e) {
+				// rơi xuống thông báo lỗi bên dưới, yêu cầu nhập lại
+			}
+
+			System.out.println(thongBaoLoi);
+		}
+	}
+
+	/**
+	 * Nhập 1 giá trị float cho form sửa: bỏ trống để giữ nguyên giá trị cũ,
+	 * nhập lại nếu không phải số thực hợp lệ hoặc không thỏa điều kiện.
+	 *
+	 * @param message       Thông báo hiển thị khi nhập.
+	 * @param giaTriCu      Giá trị cũ, dùng khi người dùng bỏ trống.
+	 * @param dieuKienHopLe Điều kiện hợp lệ áp dụng cho giá trị mới.
+	 * @param thongBaoLoi   Thông báo hiển thị khi giá trị nhập không hợp lệ.
+	 * @return Giá trị mới hợp lệ, hoặc giá trị cũ nếu bỏ trống.
+	 */
+	private float nhapFloatGiuNguyenNeuBoTrong(String message, float giaTriCu,
+			java.util.function.Predicate<Float> dieuKienHopLe, String thongBaoLoi) {
+		while (true) {
+			String input = Input.inputString(message);
+
+			if (!Validator.isNotBlank(input)) {
+				return giaTriCu;
+			}
+
+			try {
+				float value = Float.parseFloat(input.trim());
+				if (dieuKienHopLe.test(value)) {
+					return value;
+				}
+			} catch (NumberFormatException e) {
+				// rơi xuống thông báo lỗi bên dưới, yêu cầu nhập lại
+			}
+
+			System.out.println(thongBaoLoi);
+		}
+	}
+
+	/**
+	 * Nhập 1 giá trị tiền (BigDecimal, phải &gt; 0) cho form sửa: bỏ trống để
+	 * giữ nguyên giá trị cũ, nhập lại nếu không phải số hợp lệ hoặc không lớn hơn 0.
+	 *
+	 * @param message     Thông báo hiển thị khi nhập.
+	 * @param giaTriCu    Giá trị cũ, dùng khi người dùng bỏ trống.
+	 * @param thongBaoLoi Thông báo hiển thị khi giá trị nhập không hợp lệ.
+	 * @return Giá trị mới hợp lệ, hoặc giá trị cũ nếu bỏ trống.
+	 */
+	private BigDecimal nhapGiaGiuNguyenNeuBoTrong(String message, BigDecimal giaTriCu, String thongBaoLoi) {
+		while (true) {
+			String input = Input.inputString(message);
+
+			if (!Validator.isNotBlank(input)) {
+				return giaTriCu;
+			}
+
+			try {
+				BigDecimal value = BigDecimal.valueOf(Double.parseDouble(input.trim()));
+				if (Validator.isPositive(value)) {
+					return value;
+				}
+			} catch (NumberFormatException e) {
+				// rơi xuống thông báo lỗi bên dưới, yêu cầu nhập lại
+			}
+
+			System.out.println(thongBaoLoi);
+		}
 	}
 
 	/**

@@ -5,9 +5,6 @@ import java.time.LocalDateTime;
 import model.DonThue;
 import util.FilePath;
 
-/**
- * DAO quản lý dữ liệu đơn thuê (lưu trong file CSV).
- */
 public class DonThueDAO extends BaseDAO<DonThue> {
 
 	private static final String FILE_PATH = FilePath.DON_THUE;
@@ -18,7 +15,17 @@ public class DonThueDAO extends BaseDAO<DonThue> {
 	}
 
 	/**
-	 * Chuyển 1 dòng từ file sang đối tượng {@link DonThue}.
+	 * Constructor phụ, chỉ dùng cho unit test: cho phép chỉ định đường dẫn
+	 * file khác (ví dụ file tạm), tránh test đụng vào file dữ liệu thật.
+	 *
+	 * @param filePath Đường dẫn file dữ liệu dùng riêng cho test.
+	 */
+	public DonThueDAO(String filePath) {
+		super(filePath, HEADER);
+	}
+
+	/**
+	 * Chuyển 1 dòng từ file sang 1 object
 	 */
 	@Override
 	public DonThue parse(String line) {
@@ -33,19 +40,22 @@ public class DonThueDAO extends BaseDAO<DonThue> {
 	}
 
 	/**
-	 * Chuyển đối tượng {@link DonThue} sang 1 dòng của file.
+	 * Chuyển 1 object sang 1 dòng của file
 	 */
 	@Override
 	public String format(DonThue object) {
+
 		return String.join(",", String.valueOf(object.getMaDonThue()), String.valueOf(object.getUserID()),
 				object.getDiaChiNhanXe(), object.getTrangThai().name(), object.getNgayDat().toString());
 	}
 
 	/**
-	 * Lấy Id của 1 đối tượng {@link DonThue}.
+	 * Lấy Id của 1 object
 	 */
 	@Override
 	protected int getId(DonThue object) {
+
 		return object.getMaDonThue();
 	}
+
 }

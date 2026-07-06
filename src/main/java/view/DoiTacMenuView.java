@@ -12,7 +12,8 @@ public class DoiTacMenuView {
 		System.out.println("\n========== MENU ĐỐI TÁC ==========");
 		System.out.println("1. Quản lý xe");
 		System.out.println("2. Quản lý đơn thuê");
-		System.out.println("3. Đăng xuất");
+		System.out.println("3. Thông tin tài khoản");
+		System.out.println("4. Đăng xuất");
 	}
 
 	/** Nhập lựa chọn của người dùng từ menu đối tác. */

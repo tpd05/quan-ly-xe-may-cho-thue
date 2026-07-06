@@ -1,0 +1,167 @@
+1. Xem danh sách xe
+[Đối tác chọn "Quản lý xe"]
+            |
+            v
+[Menu Quản lý xe hiển thị]
+            |
+            v
+[Chọn 1: Xem danh sách xe]
+            |
+            v
+[DoiTacXeController -> XeMayService.timTatCa()]
+            |
+            v
+[XeMayService -> XeMayDAO.findAll()]
+            |
+            v
+[Xử lý lọc theo userID của đối tác]
+            |
+            v
+[Trả về danh sách xe cho Controller]
+            |
+            v
+[DoiTacXeView.hienThiDanhSachXe()]
+            |
+            v
+[Hiển thị danh sách xe trên console]
+
+2. Thêm xe mới
+[Đối tác chọn "Thêm xe mới"]
+            |
+            v
+[DoiTacXeView.nhapThongTinXeMoi()]
+            |
+            v
+[Nhập dữ liệu xe: hãng, dòng, năm, dung tích, biển số, giá/ngày, giá/tuần]
+            |
+            v
+[DoiTacXeController.themXe()]
+            |
+            v
+[Kiểm tra requireDoiTac()]
+            |
+            v
+[XeMayService.them(xe)]
+            |
+            v
+[Validate nghiệp vụ]
+  - kiểm tra biển số
+  - kiểm tra năm, dung tích, giá
+  - gán userID đối tác
+            |
+            v
+[IdGenerator.nextID(FilePath.XE_MAY)]
+            |
+            v
+[XeMayDAO.insert(xe)]
+            |
+            v
+[Ghi dòng mới vào data/xemay.csv]
+            |
+            v
+[Trả về Result thành công/thất bại]
+            |
+            v
+[DoiTacXeView.hienThiKetQua(Result)]
+
+3. Sửa thông tin xe
+[Đối tác chọn "Sửa thông tin xe"]
+            |
+            v
+[DoiTacXeView.nhapMaXeVaThongTinSua()]
+            |
+            v
+[Nhập mã xe và thông tin mới]
+            |
+            v
+[DoiTacXeController.suaXe()]
+            |
+            v
+[Kiểm tra requireDoiTac()]
+            |
+            v
+[XeMayService.timTheoId(maXe)]
+            |
+            v
+[Nếu xe không tồn tại hoặc không thuộc đối tác -> trả Result.fail]
+            |
+            v
+[Nếu tồn tại -> validate dữ liệu mới]
+            |
+            v
+[XeMayDAO.update(xeCapNhat)]
+            |
+            v
+[ghi đè toàn bộ data/xemay.csv]
+            |
+            v
+[Trả về Result thành công/thất bại]
+            |
+            v
+[DoiTacXeView.hienThiKetQua(Result)]
+
+4. Xóa xe
+[Đối tác chọn "Xóa xe"]
+            |
+            v
+[DoiTacXeView.nhapMaXeCanXoa()]
+            |
+            v
+[Nhập mã xe cần xóa]
+            |
+            v
+[DoiTacXeController.xoaXe()]
+            |
+            v
+[Kiểm tra requireDoiTac()]
+            |
+            v
+[XeMayService.timTheoId(maXe)]
+            |
+            v
+[Nếu xe không tồn tại hoặc không thuộc đối tác -> thông báo lỗi]
+            |
+            v
+[Nếu tồn tại -> Xác nhận xóa]
+            |
+            v
+[XeMayDAO.delete(maXe)]
+            |
+            v
+[ghi đè toàn bộ data/xemay.csv]
+            |
+            v
+[Trả về Result thành công/thất bại]
+            |
+            v
+[DoiTacXeView.hienThiKetQua(Result)]
+
+5. Tìm kiếm xe
+[Đối tác chọn "Tìm kiếm xe"]
+            |
+            v
+[DoiTacXeView.nhapTieuChiTimKiem()]
+            |
+            v
+[Nhập biển số hoặc thông tin tìm kiếm]
+            |
+            v
+[DoiTacXeController.timKiemXe()]
+            |
+            v
+[Kiểm tra requireDoiTac()]
+            |
+            v
+[XeMayService.timTheoBienSo(...) hoặc timTatCa() + lọc]
+            |
+            v
+[XeMayDAO.findAll() nếu cần lọc toàn bộ]
+            |
+            v
+[Lọc kết quả theo đối tác + tiêu chí tìm kiếm]
+            |
+            v
+[Trả về danh sách kết quả]
+            |
+            v
+[DoiTacXeView.hienThiDanhSachXe(kết quả)]

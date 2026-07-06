@@ -5,13 +5,15 @@ import view.DoiTacMenuView;
 
 /**
  * Controller điều hướng menu chức năng dành cho đối tác sau khi đăng nhập.
- * Cho phép: quản lý xe, quản lý đơn thuê, và đăng xuất.
+ * Cho phép: quản lý xe, quản lý đơn thuê, xem/sửa thông tin tài khoản,
+ * và đăng xuất.
  */
 public class DoiTacMenuController {
 
 	private final DoiTacMenuView view = new DoiTacMenuView();
 	private final DoiTacXeController doiTacXeController = new DoiTacXeController();
 	private final DoiTacDonThueController doiTacDonThueController = new DoiTacDonThueController();
+	private final TaiKhoanController taiKhoanController = new TaiKhoanController();
 	private final AuthController auth = new AuthController();
 
 	/**
@@ -31,6 +33,9 @@ public class DoiTacMenuController {
 					doiTacDonThueController.quanLyDonThue();
 					break;
 				case 3:
+					taiKhoanController.quanLyThongTin();
+					break;
+				case 4:
 					// Đăng xuất và thoát khỏi menu đối tác
 					auth.dangXuat();
 					view.hienThiDangXuatThanhCong();
