@@ -117,6 +117,27 @@ public final class Validator {
 				&& value.matches("^\\d{12}$");
 	}
 
+	/**
+	 * Địa chỉ (dùng cho diaChiNhanXe, diaChiCuaHang, ...): 5 - 200 ký tự,
+	 * KHÔNG được chứa dấu phẩy.
+	 *
+	 * Lý do cấm dấu phẩy: dữ liệu được lưu dạng CSV với dấu phẩy làm ký tự
+	 * phân tách cột (xem {@code TaiKhoanDAO}, {@code DonThueDAO}). Nếu giá
+	 * trị địa chỉ tự chứa dấu phẩy, dòng CSV khi ghi xuống sẽ bị lệch cột,
+	 * gây lỗi khi đọc lại (xem thêm ghi chú tại {@code BaseDAO}). Người
+	 * dùng nên thay dấu phẩy trong địa chỉ bằng dấu gạch ngang hoặc khoảng
+	 * trắng, ví dụ: "123 Nguyễn Trãi - Thanh Xuân - Hà Nội".
+	 *
+	 * @param value Địa chỉ cần kiểm tra.
+	 * @return true nếu hợp lệ (không rỗng, độ dài 5-200, không chứa dấu phẩy).
+	 */
+	public static boolean isDiaChi(String value) {
+		return isNotBlank(value)
+				&& value.length() >= 5
+				&& value.length() <= 200
+				&& !value.contains(",");
+	}
+
 	/* ==========================================================
 	 * VALIDATOR XE MÁY
 	 * ==========================================================

@@ -1,0 +1,19 @@
+[Trong DoiTacMenuView]
+   |
+   v
+[Đối tác chọn 4: Đăng xuất]
+   |
+   v
+[AuthController.dangXuat()]
+   |
+   v
+[AuthService.dangXuat()]
+   |
+   v
+[Session.clear()]
+   |
+   v
+[DoiTacMenuView.hienThiDangXuatThanhCong()]
+   |
+   v
+[Trả về menu chính hoặc thoát luồng đối tác]

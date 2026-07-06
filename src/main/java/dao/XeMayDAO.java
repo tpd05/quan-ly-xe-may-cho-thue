@@ -5,38 +5,45 @@ import java.math.BigDecimal;
 import model.XeMay;
 import util.FilePath;
 
-/**
- * DAO quản lý dữ liệu xe máy (lưu trong file CSV).
- */
 public class XeMayDAO extends BaseDAO<XeMay> {
 
 	private static final String FILE_PATH = FilePath.XE_MAY;
-	private static final String HEADER =
-			"maXe,userID,hangXe,dongXe,namSanXuat,dungTich,bienSo,trangThai,giaNgay,giaTuan";
+	private static final String HEADER = "maXe,userID,hangXe,dongXe,namSanXuat,dungTich,bienSo,trangThai,giaNgay,giaTuan";
 
 	public XeMayDAO() {
 		super(FILE_PATH, HEADER);
+
 	}
 
 	/**
-	 * Chuyển 1 dòng từ file sang đối tượng {@link XeMay}.
+	 * Constructor phụ, chỉ dùng cho unit test: cho phép chỉ định đường dẫn
+	 * file khác (ví dụ file tạm), tránh test đụng vào file dữ liệu thật.
+	 *
+	 * @param filePath Đường dẫn file dữ liệu dùng riêng cho test.
+	 */
+	public XeMayDAO(String filePath) {
+		super(filePath, HEADER);
+	}
+
+	/**
+	 * Chuyển 1 dòng từ file sang 1 object
 	 */
 	@Override
 	public XeMay parse(String line) {
 		String[] data = line.split(",");
 
 		if (data.length != 10) {
-			throw new IllegalArgumentException("Dữ liệu xe máy không hợp lệ: " + line);
+			throw new IllegalArgumentException("Dữ liệu xe máy không hợp lệ" + line);
 		}
 
 		return new XeMay(Integer.parseInt(data[0].trim()), Integer.parseInt(data[1].trim()), data[2].trim(),
-				data[3].trim(), Integer.parseInt(data[4].trim()), Float.parseFloat(data[5].trim()),
-				data[6].trim(), XeMay.TrangThai.valueOf(data[7].trim()), new BigDecimal(data[8].trim()),
+				data[3].trim(), Integer.parseInt(data[4].trim()), Float.parseFloat(data[5].trim()), data[6].trim(),
+				XeMay.TrangThai.valueOf(data[7].trim()), new BigDecimal(data[8].trim()),
 				new BigDecimal(data[9].trim()));
 	}
 
 	/**
-	 * Chuyển đối tượng {@link XeMay} sang 1 dòng của file.
+	 * Chuyển 1 object sang 1 dòng của file
 	 */
 	@Override
 	public String format(XeMay object) {
@@ -46,11 +53,9 @@ public class XeMayDAO extends BaseDAO<XeMay> {
 				object.getGiaNgay().toString(), object.getGiaTuan().toString());
 	}
 
-	/**
-	 * Lấy Id của 1 đối tượng {@link XeMay}.
-	 */
 	@Override
 	protected int getId(XeMay object) {
 		return object.getMaXe();
 	}
+
 }

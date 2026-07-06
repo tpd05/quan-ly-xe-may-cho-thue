@@ -1,0 +1,86 @@
+1. Xem danh sách đơn thuê
+[Đối tác chọn "Quản lý đơn thuê"]
+            |
+            v
+[DoiTacDonThueController.quanLyDonThue()]
+            |
+            v
+[AuthService.requireDoiTac()]
+            |
+            v
+[DoiTacDonThueView.hienThiMenu()]
+            |
+            v
+[Chọn 1: Xem danh sách đơn thuê]
+            |
+            v
+[DonThueService.layDanhSachHienThi()]
+            |
+            v
+[DonThueService.timTatCa()]
+            |
+            v
+[layDanhSachMaXeCuaDoiTac() từ XeMayService.timTatCa()]
+            |
+            v
+[ChiTietDonThueService.timTheoDanhSachMaXe(maXeList)]
+            |
+            v
+[Tạo danh sách mã đơn thuê liên quan]
+            |
+            v
+[DonThueDAO.findAll() -> lọc theo mã đơn thuê]
+            |
+            v
+[Tạo DonThueHienThiDTO từ DonThue + ChiTietHienThiDTO]
+            |
+            v
+[DoiTacDonThueView.hienThiDanhSachDonThue(danhSach)]
+            |
+            v
+[Hiển thị danh sách đơn thuê và chi tiết xe]
+
+2. Xóa toàn bộ lịch sử đơn thuê
+[Đối tác chọn "Quản lý đơn thuê"]
+            |
+            v
+[DoiTacDonThueController.quanLyDonThue()]
+            |
+            v
+[AuthService.requireDoiTac()]
+            |
+            v
+[DoiTacDonThueView.hienThiMenu()]
+            |
+            v
+[Chọn 2: Xóa toàn bộ lịch sử đơn thuê]
+            |
+            v
+[DoiTacDonThueView.xacNhanXoa()]
+            |
+            v
+[Người dùng chọn 1: Có]
+            |
+            v
+[DonThueService.xoaToanBo()]
+            |
+            v
+[DonThueService.timTatCa() -> xác định đơn thuê liên quan]
+            |
+            v
+[Tạo danh sách mã đơn thuê cần xóa]
+            |
+            v
+[ChiTietDonThueService.xoaTheoDanhSachMaDonThue(maDonThueList)]
+            |
+            v
+[DonThueDAO.delete(maDonThue) theo từng mã]
+            |
+            v
+[Trả Result.ok hoặc Result.fail]
+            |
+            v
+[DoiTacDonThueView.hienThiKetQua(result)]
+            |
+            v
+[Hiển thị kết quả thành công hoặc lỗi]
